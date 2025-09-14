@@ -16,6 +16,13 @@
 - **NTPClient** - Simplified NTP client for time synchronization
 - **WiFi** - ESP32 WiFi library for network connectivity
 - **WiFiUdp** - UDP protocol support for NTP communication
+- **time.h** - Standard C time functions for date/time manipulation and DST calculations
+
+## DST Implementation Details
+- **Zeller's Congruence Algorithm** - Used for calculating the day of the week for any date
+- **DST Transition Rules** - Europe/Amsterdam timezone with CET/CEST automatic switching
+- **Dynamic Time Offset Management** - NTP client offset adjusted based on DST status
+- **Non-blocking Timing** - millis() based timing for responsive operation
 
 ## Build System
 - PlatformIO project configuration in `platformio.ini`
