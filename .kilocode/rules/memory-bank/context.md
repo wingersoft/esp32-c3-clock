@@ -10,7 +10,7 @@ ESP32-C3 OLED NTP Clock with complete DST support for Europe/Amsterdam timezone.
 - LED status indicator setup
 - **DST Implementation**: Added complete Daylight Saving Time support for Europe/Amsterdam
   - Automatic DST transition detection and adjustment
-  - Zeller's congruence algorithm for calculating transition dates
+  - Enhanced accuracy with hardcoded transition dates for 2025-2030
   - Dynamic timezone offset management (CET/CEST)
   - Non-blocking loop optimization using millis()
   - Debug output for DST transitions

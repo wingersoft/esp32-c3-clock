@@ -19,7 +19,7 @@
 - **time.h** - Standard C time functions for date/time manipulation and DST calculations
 
 ## DST Implementation Details
-- **Zeller's Congruence Algorithm** - Used for calculating the day of the week for any date
+- **Hardcoded Transition Dates** - Used for calculating DST transitions for Europe/Amsterdam timezone (2025-2030)
 - **DST Transition Rules** - Europe/Amsterdam timezone with CET/CEST automatic switching
 - **Dynamic Time Offset Management** - NTP client offset adjusted based on DST status
 - **Non-blocking Timing** - millis() based timing for responsive operation

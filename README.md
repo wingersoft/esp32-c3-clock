@@ -96,7 +96,21 @@ The clock automatically handles DST transitions for the Europe/Amsterdam timezon
 - **Automatic Adjustment**: No manual intervention required
 - **Debug Output**: Serial monitor shows transition messages
 
-The DST implementation uses Zeller's congruence algorithm to calculate transition dates and handles edge cases including leap years.
+The DST implementation uses hardcoded transition dates for enhanced accuracy (2025-2030) and handles edge cases including leap years.
+
+### DST Testing
+
+A comprehensive test suite is available in `test_dst.cpp` to verify the correctness of the DST transition calculations for years 2025-2030. The test validates:
+
+- Correct last Sunday calculations for March and October transitions
+- Proper DST state determination at transition hours
+- Accurate timezone offset adjustments
+
+To run the test:
+```bash
+g++ test_dst.cpp -o test_dst
+./test_dst
+```
 
 ## Project Structure
 

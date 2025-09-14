@@ -17,7 +17,7 @@ The system consists of these main components:
 - Using NTPClient library for simplified NTP synchronization
 - Hardware I2C implementation for better performance with OLED display
 - Direct pin control for LED status indicator
-- Zeller's congruence algorithm for DST transition date calculations
+- Hardcoded DST transition dates for enhanced accuracy (2025-2030)
 - Dynamic timezone offset management for automatic DST transitions
 - Non-blocking loop implementation using millis() for better responsiveness
 

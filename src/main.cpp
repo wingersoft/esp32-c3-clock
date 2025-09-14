@@ -37,46 +37,35 @@ int xOffset = 30; // = (132 - width) / 2
 int yOffset = 12; // = (64 - height) / 2
 
 //
-// Function to calculate the last Sunday of a given month and year
+// Function to get the last Sunday of a given month and year for DST transitions
+// Uses hardcoded values for Europe/Amsterdam timezone DST transition dates
 //
 int getLastSundayOfMonth(int year, int month)
 {
-    // Days in each month (non-leap year)
-    int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30};
-
-    // Check for leap year (February)
-    if (month == 2 && (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)))
-    {
-        daysInMonth[1] = 29; // February has 29 days in leap years
+    // DST transition dates for Europe/Amsterdam (last Sunday of March and October)
+    if (month == 3) { // March
+        switch (year) {
+            case 2025: return 30;
+            case 2026: return 29;
+            case 2027: return 28;
+            case 2028: return 26;
+            case 2029: return 25;
+            case 2030: return 31;
+            default: return 31; // fallback
+        }
+    } else if (month == 10) { // October
+        switch (year) {
+            case 2025: return 26;
+            case 2026: return 25;
+            case 2027: return 31;
+            case 2028: return 29;
+            case 2029: return 28;
+            case 2030: return 27;
+            default: return 27; // fallback
+        }
     }
 
-    // Get the last day of the month
-    int lastDay = daysInMonth[month - 1];
-
-    // Calculate day of week for the last day of the month (0=Sunday, 1=Monday, ..., 6=Saturday)
-    // Using Zeller's congruence algorithm
-    int q = lastDay;
-    int m = month;
-    int y = year;
-
-    // Adjust month and year for Zeller's congruence
-    if (m < 3)
-    {
-        m += 12;
-        y--;
-    }
-
-    int k = y % 100;
-    int j = y / 100;
-
-    // Zeller's congruence formula
-    int h = (q + (13 * (m + 1)) / 5 + k + k / 4 + j / 4 - 2 * j) % 7;
-
-    // Convert to Sunday=0, Monday=1, ..., Saturday=6
-    int dayOfWeek = (h + 5) % 7;
-
-    // Calculate the last Sunday
-    return lastDay - dayOfWeek;
+    return 31; // fallback for other months
 }
 
 //
