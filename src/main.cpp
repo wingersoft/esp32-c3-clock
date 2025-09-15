@@ -27,6 +27,9 @@ int getLastSundayOfMonth(int year, int month);
 bool isDST(int year, int month, int day, int hour);
 void updateDST();
 
+// WiFi reconnection function
+void checkWiFiConnection();
+
 // Initialize the U8g2 library for the SSD1306 OLED display
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, OLED_RESET, OLED_SCL, OLED_SDA);
 
@@ -173,6 +176,39 @@ void updateDST()
 }
 
 //
+// Function to check WiFi connection and reconnect if needed
+//
+void checkWiFiConnection()
+{
+    // Check if WiFi is disconnected
+    if (WiFi.status() != WL_CONNECTED)
+    {
+        Serial.println("WiFi disconnected. Attempting to reconnect...");
+
+        // Disconnect and reconnect
+        WiFi.disconnect();
+        WiFi.begin(ssid, password);
+
+        // Wait for connection with a timeout (5 seconds)
+        unsigned long startAttemptTime = millis();
+        while (WiFi.status() != WL_CONNECTED && millis() - startAttemptTime < 5000)
+        {
+            delay(100);
+        }
+
+        // Check if reconnection was successful
+        if (WiFi.status() == WL_CONNECTED)
+        {
+            Serial.println("WiFi reconnected successfully");
+        }
+        else
+        {
+            Serial.println("WiFi reconnection failed");
+        }
+    }
+}
+
+//
 // Initialize the system
 //
 void setup()
@@ -210,6 +246,14 @@ void loop()
 {
     // Update NTP time every second (request every 60s, but update display every 1s)
     timeClient.update();
+
+    // Check WiFi connection periodically (every 30 seconds)
+    static unsigned long lastWiFiCheck = 0;
+    if (millis() - lastWiFiCheck > 30000)
+    { // 30 seconds
+        checkWiFiConnection();
+        lastWiFiCheck = millis();
+    }
 
     // Check DST status periodically (e.g., every 10 minutes)
     static unsigned long lastDSTCheck = 0;

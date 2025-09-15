@@ -4,7 +4,7 @@ A digital clock project built on the ESP32-C3 microcontroller that displays accu
 
 ## Features
 
-- **WiFi Connectivity**: Connects to your WiFi network for internet access
+- **WiFi Connectivity**: Connects to your WiFi network for internet access with automatic reconnection
 - **NTP Time Synchronization**: Retrieves accurate time from NTP servers
 - **Daylight Saving Time (DST) Support**: Automatically adjusts for Europe/Amsterdam timezone DST transitions
 - **OLED Display**: Shows time in HH:MM:SS format on a 128x64 SSD1306 OLED display
@@ -14,7 +14,7 @@ A digital clock project built on the ESP32-C3 microcontroller that displays accu
 
 ## Hardware Requirements
 
-- ESP32-C3 microcontroller
+- [ESP32-C3 microcontroller](https://github.com/01Space/ESP32-C3-0.42LCD)
 - SSD1306 128x64 OLED display (I2C interface)
 - Blue LED (connected to pin 8)
 - USB-C cable for programming and power
@@ -148,7 +148,7 @@ pio device monitor
 
 ## Troubleshooting
 
-- **WiFi Connection Issues**: Check your SSID and password in `config.h`
+- **WiFi Connection Issues**: Check your SSID and password in `config.h`. The device will automatically attempt to reconnect if the connection is lost.
 - **OLED Display Not Working**: Verify I2C connections (SDA: GPIO 5, SCL: GPIO 6)
 - **Time Not Syncing**: Ensure internet connectivity and NTP server availability
 - **LED Not Blinking**: Check LED connection to GPIO 8
